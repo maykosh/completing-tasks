@@ -7,7 +7,7 @@ export const Task: React.FC = () => {
    const { status, task } = useAppSelector((state) => state.todo);
 
    const getActions = (id: number) => [
-      <Delete id={id} key="delete" path={"tasks"} />,
+      <Delete params={id} key="delete" path={"tasks"} />,
    ];
 
    return (
