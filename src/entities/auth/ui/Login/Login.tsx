@@ -2,20 +2,23 @@ import React, { useEffect } from "react";
 import { LockOutlined, PhoneOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "@/shared";
+import {  useAppDispatch, useAppSelector } from "@/shared";
 import { login } from "../../api/authThunk";
 
 export const Login: React.FC = () => {
+   const [isLoading, setIsLoading] = React.useState(false)
    const { isAuth } = useAppSelector((state) => state.auth);
    const dispatch = useAppDispatch();
    const navigate = useNavigate();
 
    const onFinish = (values: { password: string; phone: string }) => {
+      setIsLoading(true)
       dispatch(login(values));
    };
    useEffect(() => {
       if (isAuth) {
          navigate("/");
+         setIsLoading(false)
       }
    }, [isAuth, navigate]);
 
@@ -47,7 +50,12 @@ export const Login: React.FC = () => {
          </Form.Item>
 
          <Form.Item>
-            <Button block type="primary" htmlType="submit">
+            <Button
+               block
+               type="primary"
+               htmlType="submit"
+               loading={isLoading}
+            >
                Вход
             </Button>
             <div className="mt-[10px] ">

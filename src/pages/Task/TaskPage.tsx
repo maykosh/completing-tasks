@@ -1,6 +1,6 @@
 import { fetchCategories, fetchTasks } from "@/entities";
+import { Task } from "@/features";
 import { useAppDispatch, useAppSelector } from "@/shared";
-import { TaskLayout } from "@/widgets";
 import React from "react";
 
 export const TaskPage: React.FC = () => {
@@ -14,7 +14,7 @@ export const TaskPage: React.FC = () => {
    }, [dispatch, task]);
    return (
       <div>
-         <TaskLayout />
+         <Task />
       </div>
    );
 };

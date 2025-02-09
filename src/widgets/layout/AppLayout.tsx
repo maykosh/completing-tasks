@@ -1,9 +1,14 @@
 import { TbCategory } from "react-icons/tb";
 import { BiTask } from "react-icons/bi";
 import React from "react";
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import {
+   LogoutOutlined,
+   MenuFoldOutlined,
+   MenuUnfoldOutlined,
+} from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
 import { Link, useLocation } from "react-router-dom";
+import { Logout } from "@/entities";
 
 const { Header, Sider, Content } = Layout;
 const items = [
@@ -17,13 +22,18 @@ const items = [
       icon: <TbCategory />,
       label: <Link to="/categories">Список Категории</Link>,
    },
+   {
+      key: "logout",
+      icon: <LogoutOutlined />,
+      label: <Logout />,
+   },
 ];
 
-interface IProps{
-   children: React.ReactNode
+interface IProps {
+   children: React.ReactNode;
 }
 
-export const AppLayout: React.FC<IProps> = ({children}) => {
+export const AppLayout: React.FC<IProps> = ({ children }) => {
    const [collapsed, setCollapsed] = React.useState(false);
    const loaction = useLocation();
    const {
@@ -32,7 +42,13 @@ export const AppLayout: React.FC<IProps> = ({children}) => {
 
    return (
       <Layout className="h-[100lvh]">
-         <Sider theme="dark" trigger={null} collapsible collapsed={collapsed} width={"250px"}>
+         <Sider
+            theme="dark"
+            trigger={null}
+            collapsible
+            collapsed={collapsed}
+            width={"250px"}
+         >
             <div className="demo-logo-vertical text-amber-100 flex justify-center p-[20px]">
                Comlete Tasks
             </div>

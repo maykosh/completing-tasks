@@ -1,5 +1,6 @@
 import { AuthPage, CategoryPage, HomePage, LoginPage, TaskPage } from "@/pages";
-import { AppLayout, AppRoutesProps } from "@/shared";
+import {  AppRoutesProps } from "@/shared";
+import { AppLayout } from "@/widgets";
 
 export enum AppRoutes {
    HOME = "home",
@@ -7,7 +8,6 @@ export enum AppRoutes {
    AUTH = "auth",
    TASKS = "tasks",
    CATEGORIES = "categories",
-   // NOT_FOUND = "not_found",
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
@@ -16,7 +16,6 @@ export const RoutePath: Record<AppRoutes, string> = {
    [AppRoutes.LOGIN]: "/login",
    [AppRoutes.CATEGORIES]: "/categories",
    [AppRoutes.TASKS]: "/tasks",
-   // [AppRoutes.NOT_FOUND]: "*",
 };
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
