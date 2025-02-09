@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
 const persistConfig: PersistConfig<RootState> = {
    key: "root",
    storage: storage,
-   whitelist: ["auth"] as (keyof RootState)[],
+   whitelist: ["todo"] as (keyof RootState)[],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
