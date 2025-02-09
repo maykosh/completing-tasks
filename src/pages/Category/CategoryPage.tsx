@@ -1,6 +1,6 @@
 import { fetchCategories } from "@/entities";
 import { Category } from "@/features";
-import { useAppDispatch, useAppSelector, withLoginRedirect } from "@/shared";
+import { useAppDispatch, useAppSelector } from "@/shared";
 import React from "react";
 export const CategoryPage: React.FC = () => {
    const { categories } = useAppSelector((state) => state.todo);
@@ -17,4 +17,3 @@ export const CategoryPage: React.FC = () => {
    );
 };
 
-export const ProtectedCategoryPage = withLoginRedirect(CategoryPage);

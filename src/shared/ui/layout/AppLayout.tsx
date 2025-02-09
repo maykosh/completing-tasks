@@ -3,7 +3,7 @@ import { BiTask } from "react-icons/bi";
 import React from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const { Header, Sider, Content } = Layout;
 const items = [
@@ -18,7 +18,12 @@ const items = [
       label: <Link to="/categories">Список Категории</Link>,
    },
 ];
-export const AppLayout: React.FC = () => {
+
+interface IProps{
+   children: React.ReactNode
+}
+
+export const AppLayout: React.FC<IProps> = ({children}) => {
    const [collapsed, setCollapsed] = React.useState(false);
    const loaction = useLocation();
    const {
@@ -63,7 +68,7 @@ export const AppLayout: React.FC = () => {
                   borderRadius: borderRadiusLG,
                }}
             >
-               {<Outlet />}
+               {children}
             </Content>
          </Layout>
       </Layout>

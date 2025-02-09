@@ -1,5 +1,5 @@
 import React from "react";
-import { login } from "@/entities";
+import { Login, login } from "@/entities";
 import { useAppDispatch } from "@/shared/hooks/useAppDispatch";
 
 const LoginPage: React.FC = () => {
@@ -12,6 +12,10 @@ const LoginPage: React.FC = () => {
          })
       );
    }, []);
-   return <div>LoginPage</div>;
+   return (
+      <div className="flex items-center justify-center w-[100%] h-[100%]">
+         <Login />
+      </div>
+   );
 };
 export default LoginPage;

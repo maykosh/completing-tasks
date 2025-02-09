@@ -4,16 +4,16 @@ import { Payload, Status } from "@/shared";
 
 type TState = {
    login: string | null;
-   // email: string | null;
    phone: string | null;
    status: Status;
+   isAuth: boolean;
 };
 
 const initialState: TState = {
    login: null,
-   // email: null,
    phone: null,
    status: Status.Loading,
+   isAuth: true,
 };
 
 const authSlice = createSlice({
@@ -26,13 +26,14 @@ const authSlice = createSlice({
             state.status = Status.Loading;
          })
          .addCase(login.fulfilled, (state, action: PayloadAction<Payload>) => {
-            // state.email = action.payload.name;
             state.login = action.payload.name;
             state.phone = action.payload.phone;
+            state.isAuth = true;
             state.status = Status.Success;
          })
          .addCase(login.rejected, (state) => {
             state.status = Status.Error;
+            state.isAuth = false;
          });
    },
 });

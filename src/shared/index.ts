@@ -7,3 +7,4 @@ export { withLoginRedirect } from "./lib/whitLoginRedirect";
 export { TaskCard } from "./ui/Cart/Card";
 export { CartLayout } from "./ui/CartLayout/CartLayout";
 export { CategoryCard } from "./ui/Cart/CategoryCard";
+export * from "./types/router"
