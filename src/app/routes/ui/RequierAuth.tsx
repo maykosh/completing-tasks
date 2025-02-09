@@ -1,21 +1,38 @@
-import { useAppSelector } from "@/shared";
-import { JSX, useEffect } from "react";
+import { JSX, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { RoutePath } from "../routeConfig/routeConfig";
+import { authActions } from "@/entities";
+import { useAppDispatch } from "@/shared";
 
 export const RequierAuth = ({ children }: { children: JSX.Element }) => {
-   const { isAuth } = useAppSelector((state) => state.auth);
-   const token = localStorage.getItem("token");
+   const [token, setToken] = useState(localStorage.getItem("token"));
+   const authAction = authActions;
+   const dispatch = useAppDispatch();
+
    const location = useLocation();
    const navigate = useNavigate();
    useEffect(() => {
-      if (!token && !isAuth) {
+      const handleStorageChange = () => {
+         setToken(localStorage.getItem("token"));
+      };
+
+      window.addEventListener("storage", handleStorageChange);
+      
+      if (!token) {
+         dispatch(authAction.setAuth(false));
+      }
+      return () => {
+         window.removeEventListener("storage", handleStorageChange);
+      };
+   }, [authAction, dispatch, token]);
+   useEffect(() => {
+      if (!token) {
          navigate(RoutePath.login, {
             state: { from: location },
             replace: true,
          });
       }
-   }, [isAuth, location, navigate, token]);
-   if (!token && !isAuth) return null;
+   }, [location, navigate, token]);
+   if (!token) return null;
    return children;
 };

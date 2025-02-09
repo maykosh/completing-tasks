@@ -66,6 +66,7 @@ export const AppLayout: React.FC<IProps> = ({children}) => {
                   minHeight: 280,
                   background: colorBgContainer,
                   borderRadius: borderRadiusLG,
+                  overflowY: "auto",
                }}
             >
                {children}

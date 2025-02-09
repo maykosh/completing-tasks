@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { LockOutlined, PhoneOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "@/shared";
+import { login } from "../../api/authThunk";
 
 export const Login: React.FC = () => {
-   const onFinish = (values: any) => {
-      console.log("Received values of form: ", values);
+   const { isAuth } = useAppSelector((state) => state.auth);
+   const dispatch = useAppDispatch();
+   const navigate = useNavigate();
+
+   const onFinish = (values: { password: string; phone: string }) => {
+      dispatch(login(values));
    };
+   useEffect(() => {
+      if (isAuth) {
+         navigate("/");
+      }
+   }, [isAuth, navigate]);
 
    return (
       <Form
@@ -18,7 +29,9 @@ export const Login: React.FC = () => {
       >
          <Form.Item
             name="phone"
-            rules={[{ required: true, message: "Please input your phone number!" }]}
+            rules={[
+               { required: true, message: "Please input your phone number!" },
+            ]}
          >
             <Input prefix={<PhoneOutlined />} placeholder="телефон номер" />
          </Form.Item>
@@ -35,9 +48,14 @@ export const Login: React.FC = () => {
 
          <Form.Item>
             <Button block type="primary" htmlType="submit">
-              Вход
+               Вход
             </Button>
-            <div className="mt-[10px] ">если нет аккаунта: <Link className=" text-blue-500 "  to="/auth">Авторизация!</Link></div>
+            <div className="mt-[10px] ">
+               если нет аккаунта:{" "}
+               <Link className=" text-blue-500 " to="/auth">
+                  Авторизация!
+               </Link>
+            </div>
          </Form.Item>
       </Form>
    );
