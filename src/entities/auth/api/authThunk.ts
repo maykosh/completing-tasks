@@ -23,8 +23,3 @@ export const login = createAsyncThunk<Payload, TAsyncThunkArg>(
       }
    }
 );
-
-export const logout = createAsyncThunk("auth/logout", async () => {
-   await api.delete("/login");
-   localStorage.removeItem("token");
-});
